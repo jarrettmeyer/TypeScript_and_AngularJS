@@ -1,0 +1,8 @@
+.idea/
+.tscache/
+bower_components/
+node_modules/
+
+app/**/*.js
+app/**/*.js.map
+

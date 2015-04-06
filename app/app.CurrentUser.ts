@@ -1,0 +1,25 @@
+/// <reference path="../typings/all.d.ts"/>
+
+module app {
+
+    export class CurrentUser implements ICurrentUser {
+        roles: string[];
+        username: string;
+
+        constructor() {
+            this.roles = [];
+            this.username = null;
+        }
+
+        get isAuthenticated(): boolean {
+            return !!this.username;
+        }
+
+        isInRole(role: string): boolean {
+            // indexOf returns -1 if the string is not found.
+            return this.roles.indexOf(role) >= 0;
+        }
+    }
+
+}
+
