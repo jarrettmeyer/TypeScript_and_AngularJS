@@ -17,6 +17,12 @@ Next, you will need to concatenate the JS into a single file.
 $ grunt concat
 ```
 
+Alternatively, you can do all of this in a single step with grunt.
+
+```
+$ grunt build:dev
+```
+
 ## Running Tests
 
 ```

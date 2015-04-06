@@ -8,8 +8,13 @@
         .config(config);
 
     config.$inject = [
+        '$locationProvider'
     ];
-    function config(): void {
+    function config($locationProvider: ng.ILocationProvider): void {
+        //
+        // Setup hash-links.
+        //
+        $locationProvider.html5Mode(true);
     }
 
 })();
