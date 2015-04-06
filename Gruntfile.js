@@ -16,7 +16,9 @@ module.exports = function (grunt) {
                     // Then grab anything else name *.module.js.
                     'app/**/*.module.js',
                     // Then grab everything else.
-                    'app/**/*.js'
+                    'app/**/*.js',
+                    // But don't grab test scripts.
+                    '!app/**/*.test.js'
                 ],
                 dest: 'scripts/app.js'
             }
@@ -29,7 +31,7 @@ module.exports = function (grunt) {
                 ],
                 options: {
                     target: 'es5',
-                    sourceMap: true
+                    sourceMap: false
                 }
             }
         },

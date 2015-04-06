@@ -1,10 +1,18 @@
-/// <reference path="../typings/all.d.ts" />
+/// <reference path="../scripts/typings/all.d.ts" />
 
 ((): void => {
-    "use strict";
 
-    angular.module("app", [
-        "ngStorage"
+    angular.module('app', [
+        //
+        // Globally required modules.
+        //
+        'ngRoute',
+        //
+        // Application modules.
+        //
+        'app.auth',
+        'app.layout',
+        'app.widgets'
     ]);
 
 })();

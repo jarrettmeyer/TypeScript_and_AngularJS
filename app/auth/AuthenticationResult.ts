@@ -1,4 +1,4 @@
-/// <reference path="../../typings/all.d.ts" />
+/// <reference path="../../scripts/typings/all.d.ts" />
 
 module app.auth {
 

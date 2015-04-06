@@ -13,13 +13,14 @@
 /// <reference path="./mocha/mocha.d.ts" />
 
 // --- Application interfaces ---
-/// <reference path="../app/common/IAppCookies.d.ts" />
-/// <reference path="../app/common/ICredentials.d.ts" />
-/// <reference path="../app/common/ICurrentUser.d.ts" />
-/// <reference path="../app/common/IUser.d.ts" />
+/// <reference path="../../app/common/IAppCookies.d.ts" />
+/// <reference path="../../app/common/ICredentials.d.ts" />
+/// <reference path="../../app/common/ICurrentUser.d.ts" />
+/// <reference path="../../app/common/IUser.d.ts" />
 
 // --- Application classes ---
-/// <reference path="../app/app.CurrentUser.ts" />
-/// <reference path="../app/auth/AuthenticationController.ts" />
-/// <reference path="../app/auth/AuthenticationResult.ts" />
-/// <reference path="../app/auth/AuthenticationService.ts" />
+/// <reference path="../../app/app.CurrentUser.ts" />
+/// <reference path="../../app/auth/AuthenticationController.ts" />
+/// <reference path="../../app/auth/AuthenticationResult.ts" />
+/// <reference path="../../app/auth/AuthenticationService.ts" />
+/// <reference path="../../app/layout/NavigationController.ts" />

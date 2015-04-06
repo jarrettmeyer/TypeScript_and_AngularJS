@@ -1,20 +1,29 @@
-///<reference path="../../typings/all.d.ts"/>
+///<reference path="../../scripts/typings/all.d.ts"/>
 
 module app.layout {
     'use strict';
 
-    interface INavigationScope {
-        fullName: string;
+    export interface INavigationScope {
+        isAuthenticated: boolean;
+        username: string;
     }
 
-    class NavigationController implements INavigationScope {
+    export class NavigationController implements INavigationScope {
 
-        fullName: string;
+        private _currentUser: ICurrentUser;
 
         static $inject = ['currentUser'];
         constructor(currentUser: ICurrentUser) {
             var vm = this;
-            vm.fullName = currentUser.fullName;
+            vm._currentUser = currentUser;
+        }
+
+        get isAuthenticated(): boolean {
+            return this._currentUser.isAuthenticated;
+        }
+
+        get username(): string {
+            return this._currentUser.username;
         }
 
     }

@@ -1,10 +1,10 @@
-/// <reference path="../../typings/all.d.ts" />
+/// <reference path="../../scripts/typings/all.d.ts" />
 
 var expect = chai.expect;
 
 describe('AuthenticationController', () => {
 
-    var controller: app.auth.IAuthenticationScope;
+    var ctrl: app.auth.IAuthenticationScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
     var mockCurrentUser: ICurrentUser;
     var mockUser: IUser;
@@ -15,32 +15,32 @@ describe('AuthenticationController', () => {
         createAuthenticationService();
         angular.mock.module('app.auth');
         angular.mock.inject(($controller) => {
-            controller = $controller('app.auth.AuthenticationController', {
+            ctrl = $controller('app.auth.AuthenticationController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
                 'currentUser': mockCurrentUser
             });
-            controller.username = 'john.doe';
-            controller.password = 'myPassword';
+            ctrl.username = 'john.doe';
+            ctrl.password = 'myPassword';
         });
     });
 
     it('can authenticate a username and password', () => {
-        return controller.authenticate()
+        return ctrl.authenticate()
             .then(() => {
-                expect(controller.isAuthenticated).to.equal(true);
+                expect(ctrl.isAuthenticated).to.equal(true);
             });
     });
 
     it('does not authenticate on authentication failure', () => {
         mockUser = null;
-        return controller.authenticate()
+        return ctrl.authenticate()
             .then(() => {
-                expect(controller.isAuthenticated).to.equal(false);
+                expect(ctrl.isAuthenticated).to.equal(false);
             });
     });
 
     it('is not authenticated by default', function () {
-        expect(controller.isAuthenticated).to.equal(false);
+        expect(ctrl.isAuthenticated).to.equal(false);
     });
 
     function createAuthenticationService(): void {
@@ -53,14 +53,7 @@ describe('AuthenticationController', () => {
     }
 
     function createCurrentUser(): void {
-        mockCurrentUser = {
-            isAuthenticated: false,
-            roles: [],
-            username: null,
-            isInRole(role: string): boolean {
-                return false;
-            }
-        };
+        mockCurrentUser = new app.CurrentUser();
     }
 
     function createUser(): void {

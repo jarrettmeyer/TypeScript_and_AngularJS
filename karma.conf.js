@@ -7,9 +7,9 @@ module.exports = function(config) {
 
         files: [
             'bower_components/jquery/dist/jquery.js',
-            'bower_components/angular/angular.js',
-            'bower_components/ngstorage/ngStorage.js',
+            'bower_components/angularjs/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-route/angular-route.js',
             'bower_components/bluebird/js/browser/bluebird.js',
             'app/app.module.js',
             'app/*.js',

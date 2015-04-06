@@ -2,6 +2,6 @@
 
 ((): void => {
 
-    angular.module('app.layout', []);
+    angular.module('app.widgets', []);
 
 })();

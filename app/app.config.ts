@@ -1,4 +1,4 @@
-/// <reference path="../typings/all.d.ts" />
+/// <reference path="../scripts/typings/all.d.ts" />
 
 ((): void => {
     "use strict";
@@ -7,9 +7,9 @@
         .module('app')
         .config(config);
 
-    config.$inject = ['$locationProvider'];
-    function config($locationProvider: ng.ILocationProvider): void {
-        $locationProvider.html5Mode(true);
+    config.$inject = [
+    ];
+    function config(): void {
     }
 
 })();

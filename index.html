@@ -1,8 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="app">
 <head>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <script type="javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <title>TypeScript &amp; AngularJS</title>
+
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./stylesheets/site.css" />
 </head>
-    <h1>Hello, World!</h1>
+<body>
+
+    <div ng-controller="app.layout.NavigationController as navigation"
+         ng-include="'app/layout/navigation.html'">
+    </div>
+
+    <div class="container">
+
+        <div ng-controller="app.widgets.LoginMessageController as loginmessage"
+             ng-include="'app/widgets/loginmessage.html'">
+        </div>
+
+        <div ng-view>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./bower_components/angularjs/angular.js"></script>
+    <script src="./bower_components/angular-route/angular-route.js"></script>
+    <script src="./scripts/app.js"></script>
+</body>
 </html>
