@@ -12,6 +12,7 @@
         //
         'app.auth',
         'app.layout',
+        'app.welcome',
         'app.widgets'
     ]);
 

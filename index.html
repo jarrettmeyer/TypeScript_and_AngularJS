@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="./stylesheets/site.css" />
 
-    <base href=".">
+    <base href="/">
 
 </head>
 <body>
@@ -29,7 +29,9 @@
 
     </div>
 
-
+    <div ng-controller="app.auth.LoginController as login"
+         ng-include="'app/auth/login.html'">
+    </div>
 
 
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
@@ -37,5 +39,6 @@
     <script src="./bower_components/angularjs/angular.js"></script>
     <script src="./bower_components/angular-route/angular-route.js"></script>
     <script src="./scripts/app.js"></script>
+
 </body>
 </html>

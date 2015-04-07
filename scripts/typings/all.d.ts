@@ -20,7 +20,7 @@
 
 // --- Application classes ---
 /// <reference path="../../app/app.CurrentUser.ts" />
-/// <reference path="../../app/auth/AuthenticationController.ts" />
 /// <reference path="../../app/auth/AuthenticationResult.ts" />
 /// <reference path="../../app/auth/AuthenticationService.ts" />
+/// <reference path="../../app/auth/LoginController.ts" />
 /// <reference path="../../app/layout/NavigationController.ts" />

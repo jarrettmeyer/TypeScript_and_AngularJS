@@ -37,6 +37,22 @@ $ grunt build:dev
 
 ## Running Tests
 
+Unit tests are run with [Karma](http://karma-runner.github.io/0.12/index.html). You will first need to transpile the
+TypeScript to JavaScript, then run the tests.
+
+```
+$ grunt ts
+```
+
 ```
 $ karma start
 ```
+
+When developing, I have two terminal windows open at all times. 
+
+The first window is running `grunt watch`. This is watching all `*.ts` files for modifications and creating the
+corresponding `*.js` files. It is then watching all `*.js` files for modifications and concatenating them into a
+single `app.js` file.
+
+The second terminal window is running `karma` (via the `karma start` command).
+

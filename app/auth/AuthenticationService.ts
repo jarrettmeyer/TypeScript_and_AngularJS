@@ -21,7 +21,7 @@ module app.auth {
             // service is outside the scope of this example. I am simply checking the password in-memory, looking
             // for the phrase 'password' somewhere in the password.
             //
-            this.$log.info('Attempting to validate user: ', credentials.username);
+            this.$log.info('Attempting to validate user: ', credentials.username + '.');
             var user: IUser = null;
             if (/password/i.test(credentials.password)) {
                 user = AuthenticationService.createUser(credentials);

@@ -2,14 +2,14 @@
 
 module app.auth {
 
-    export interface IAuthenticationScope {
+    export interface ILoginScope {
         isAuthenticated: boolean;
         password: string;
         username: string;
         authenticate(): ng.IPromise<void>;
     }
 
-    class AuthenticationController implements IAuthenticationScope {
+    class LoginController implements ILoginScope {
 
         password: string;
         username: string;
@@ -49,5 +49,5 @@ module app.auth {
 
     angular
         .module('app.auth')
-        .controller('app.auth.AuthenticationController', AuthenticationController);
+        .controller('app.auth.LoginController', LoginController);
 }

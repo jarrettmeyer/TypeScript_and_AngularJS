@@ -2,6 +2,8 @@
 
 ((): void => {
 
-    angular.module('app.welcome', []);
+    angular.module('app.welcome', [
+        'ngRoute'
+    ]);
 
 })();

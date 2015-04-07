@@ -2,6 +2,8 @@
 
 ((): void => {
 
-    angular.module('app.auth', []);
+    angular.module('app.auth', [
+        'ngRoute'
+    ]);
 
 })();

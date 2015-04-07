@@ -2,9 +2,9 @@
 
 var expect = chai.expect;
 
-describe('AuthenticationController', () => {
+describe('LoginController', () => {
 
-    var ctrl: app.auth.IAuthenticationScope;
+    var ctrl: app.auth.ILoginScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
     var mockCurrentUser: ICurrentUser;
     var mockUser: IUser;
@@ -15,7 +15,7 @@ describe('AuthenticationController', () => {
         createAuthenticationService();
         angular.mock.module('app.auth');
         angular.mock.inject(($controller) => {
-            ctrl = $controller('app.auth.AuthenticationController', {
+            ctrl = $controller('app.auth.LoginController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
                 'currentUser': mockCurrentUser
             });
