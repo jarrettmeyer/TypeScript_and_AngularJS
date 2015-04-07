@@ -2,6 +2,15 @@
 
 module app {
 
+    export interface ICurrentUser {
+        isAuthenticated: boolean;
+        roles: string[];
+        username: string;
+
+        isInRole(role: string): boolean;
+    }
+
+
     export class CurrentUser implements ICurrentUser {
         roles: string[];
         username: string;

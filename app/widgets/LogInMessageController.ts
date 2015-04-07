@@ -12,6 +12,9 @@ module app.widgets {
 
         private _currentUser: ICurrentUser;
 
+        static $inject = [
+            'currentUser'
+        ];
         constructor(currentUser: ICurrentUser) {
             this._currentUser = currentUser;
         }

@@ -41,7 +41,9 @@ module app.auth {
             };
             return this._authenticationService.authenticate(credentials)
                 .then((result) => {
-                    this._isAuthenticated = result.isSuccessful;
+                    if (result.isSuccessful) {
+                        this._isAuthenticated = true;
+                    }
                 });
         }
 

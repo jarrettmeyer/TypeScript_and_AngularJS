@@ -8,15 +8,10 @@
 /// <reference path="./angularjs/angular-mocks.d.ts" />
 /// <reference path="./angularjs/angular-route.d.ts" />
 /// <reference path="./bluebird/bluebird.d.ts" />
+/// <reference path="./bootstrap/bootstrap.d.ts" />
 /// <reference path="./chai/chai.d.ts" />
 /// <reference path="./jquery/jquery.d.ts" />
 /// <reference path="./mocha/mocha.d.ts" />
-
-// --- Application interfaces ---
-/// <reference path="../../app/common/IAppCookies.d.ts" />
-/// <reference path="../../app/common/ICredentials.d.ts" />
-/// <reference path="../../app/common/ICurrentUser.d.ts" />
-/// <reference path="../../app/common/IUser.d.ts" />
 
 // --- Application classes ---
 /// <reference path="../../app/app.CurrentUser.ts" />

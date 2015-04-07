@@ -1,8 +1,14 @@
-<div class="page-header">
-    <h1>Welcome!</h1>
-</div>
+<div ng-controller="app.welcome.WelcomeController as welcome">
+    <div class="page-header">
+        <h1>Welcome!</h1>
+    </div>
 
-<p>
-    This is my demo application showing <a href="http://www.typescriptlang.org/">TypeScript</a> and
-    <a href="https://angularjs.org/">AngularJS</a> playing nicely together.
-</p>
+    <p>
+        This is my demo application showing <a href="http://www.typescriptlang.org/">TypeScript</a> and
+        <a href="https://angularjs.org/">AngularJS</a> playing nicely together.
+    </p>
+
+    <p>
+        The current time is {{welcome.timestamp}}.
+    </p>
+</div>

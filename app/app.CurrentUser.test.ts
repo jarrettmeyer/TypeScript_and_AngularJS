@@ -4,7 +4,7 @@ var expect = chai.expect;
 
 describe('CurrentUser', () => {
 
-    var currentUser: app.CurrentUser;
+    var currentUser: app.ICurrentUser;
 
     beforeEach(() => {
         currentUser = new app.CurrentUser();

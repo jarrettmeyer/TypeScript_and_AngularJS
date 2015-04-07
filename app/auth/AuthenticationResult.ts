@@ -7,6 +7,11 @@ module app.auth {
         user: IUser;
     }
 
+    export interface IUser {
+        roles: string[];
+        username: string;
+    }
+
     export class AuthenticationResult implements IAuthenticationResult {
         isSuccessful: boolean;
         user: IUser;

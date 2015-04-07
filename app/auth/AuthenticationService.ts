@@ -6,6 +6,11 @@ module app.auth {
         authenticate(credentials: ICredentials): ng.IPromise<IAuthenticationResult>;
     }
 
+    export interface ICredentials {
+        password: string;
+        username: string;
+    }
+
     class AuthenticationService implements IAuthenticationService {
 
         private $log: ng.ILogService;
