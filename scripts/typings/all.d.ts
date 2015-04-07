@@ -11,6 +11,7 @@
 /// <reference path="./chai/chai.d.ts" />
 /// <reference path="./jquery/jquery.d.ts" />
 /// <reference path="./mocha/mocha.d.ts" />
+/// <reference path="./sinon/sinon.d.ts" />
 
 // --- Application classes ---
 /// <reference path="../../app/app.CurrentUser.ts" />
@@ -21,3 +22,4 @@
 /// <reference path="../../app/auth/LoginModalService.ts" />
 /// <reference path="../../app/layout/NavigationController.ts" />
 /// <reference path="../../app/services/jQuery.ts" />
+/// <reference path="../../app/todo/Todo.ts" />
