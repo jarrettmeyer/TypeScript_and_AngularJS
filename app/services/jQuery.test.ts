@@ -4,20 +4,27 @@ var expect = chai.expect;
 
 describe('jQuery', () => {
 
-    var $: JQuery;
+    var jQueryStatic: JQueryStatic;
 
     beforeEach((): void => {
         angular.mock.module('app');
 
-        angular.mock.inject((_jQuery_) => {
-            $ = _jQuery_;
-        });
+        angular.mock.inject([
+            'jQuery',
+            (_jQuery) => {
+                jQueryStatic = _jQuery;
+            }
+        ]);
 
     });
 
+    it('has a modal function', () => {
+        expect(typeof (jQueryStatic('body').modal)).to.equal('function');
+    });
+
     it('is properly defined', () => {
-        expect($).to.not.equal(null);
-        expect(typeof $).to.equal('function');
+        expect(jQueryStatic).to.not.equal(null);
+        expect(typeof jQueryStatic).to.equal('function');
     });
 
 });
