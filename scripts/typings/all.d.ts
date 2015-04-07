@@ -5,6 +5,7 @@
 
 // ---  ---
 /// <reference path="./angularjs/angular.d.ts" />
+/// <reference path="./angularjs/angular-cookies.d.ts" />
 /// <reference path="./angularjs/angular-mocks.d.ts" />
 /// <reference path="./angularjs/angular-route.d.ts" />
 /// <reference path="./bootstrap/bootstrap.d.ts" />
@@ -21,6 +22,7 @@
 /// <reference path="../../app/auth/LoginController.ts" />
 /// <reference path="../../app/auth/LoginModalService.ts" />
 /// <reference path="../../app/layout/NavigationController.ts" />
+/// <reference path="../../app/services/CookieService.ts" />
 /// <reference path="../../app/services/jQuery.ts" />
 /// <reference path="../../app/services/localStorage.ts" />
 /// <reference path="../../app/todo/Todo.ts" />

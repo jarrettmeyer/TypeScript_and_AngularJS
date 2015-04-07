@@ -6,6 +6,7 @@
         //
         // Globally required modules.
         //
+        'ngCookies',
         'ngRoute',
         //
         // Application modules.
