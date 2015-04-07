@@ -24,3 +24,4 @@
 /// <reference path="../../app/auth/AuthenticationService.ts" />
 /// <reference path="../../app/auth/LoginController.ts" />
 /// <reference path="../../app/layout/NavigationController.ts" />
+/// <reference path="../../app/services/jQuery.ts" />
