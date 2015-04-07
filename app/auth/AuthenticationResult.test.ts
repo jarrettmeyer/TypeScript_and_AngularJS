@@ -4,7 +4,7 @@ var expect = chai.expect;
 
 describe('AuthenticationResult', () => {
 
-    var user: IUser;
+    var user: app.auth.IUser;
     var result: app.auth.IAuthenticationResult;
 
     it('assigns the user to the result', () => {

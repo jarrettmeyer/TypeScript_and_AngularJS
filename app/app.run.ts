@@ -7,7 +7,11 @@
         .module('app')
         .run(run);
 
-    function run(): void {
+    run.$inject = [
+        'app.RouteChangeHandler'
+    ];
+    function run(routeChangeHandler: app.IRouteChangeHandler): void {
+        routeChangeHandler.initialize();
     }
 
 })();

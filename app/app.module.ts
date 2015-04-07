@@ -12,6 +12,7 @@
         //
         'app.auth',
         'app.layout',
+        'app.todo',
         'app.welcome',
         'app.widgets'
     ]);

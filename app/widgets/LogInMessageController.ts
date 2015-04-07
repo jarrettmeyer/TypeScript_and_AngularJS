@@ -6,25 +6,34 @@ module app.widgets {
     export interface LoginMessageScope {
         isAuthenticated: boolean;
         isNotAuthenticated: boolean;
+        showDialog(): void;
     }
 
     export class LoginMessageController implements LoginMessageScope {
 
-        private _currentUser: ICurrentUser;
+        currentUser: ICurrentUser;
+        loginModalService: app.auth.ILoginModalService;
 
         static $inject = [
-            'currentUser'
+            'currentUser',
+            'app.auth.LoginModalService'
         ];
-        constructor(currentUser: ICurrentUser) {
-            this._currentUser = currentUser;
+        constructor(currentUser: ICurrentUser,
+                    loginModalService: app.auth.ILoginModalService) {
+            this.currentUser = currentUser;
+            this.loginModalService = loginModalService;
         }
 
         get isAuthenticated(): boolean {
-            return this._currentUser.isAuthenticated;
+            return this.currentUser.isAuthenticated;
         }
 
         get isNotAuthenticated(): boolean {
-            return !this._currentUser.isAuthenticated;
+            return !this.currentUser.isAuthenticated;
+        }
+
+        showDialog(): void {
+            this.loginModalService.show();
         }
 
     }

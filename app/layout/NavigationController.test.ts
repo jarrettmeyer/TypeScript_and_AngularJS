@@ -5,7 +5,7 @@ var expect = chai.expect;
 describe('NavigationController', () => {
 
     var ctrl: app.layout.INavigationScope;
-    var currentUser: ICurrentUser;
+    var currentUser: app.ICurrentUser;
 
     beforeEach(() => {
         currentUser = new app.CurrentUser();

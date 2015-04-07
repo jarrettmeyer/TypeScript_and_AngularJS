@@ -7,25 +7,29 @@ module app.auth {
         password: string;
         username: string;
         authenticate(): ng.IPromise<void>;
+        hideDialog(): void;
     }
 
     class LoginController implements ILoginScope {
 
-        $scope: ng.IScope;
-        isAuthenticated: boolean;
-        password: string;
-        username: string;
         authenticationService: app.auth.IAuthenticationService;
         currentUser: ICurrentUser;
+        isAuthenticated: boolean;
+        loginModalService: app.auth.ILoginModalService;
+        password: string;
+        username: string;
 
         static $inject = [
             'app.auth.AuthenticationService',
-            'currentUser'
+            'currentUser',
+            'app.auth.LoginModalService'
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
-                    currentUser: ICurrentUser) {
+                    currentUser: ICurrentUser,
+                    loginModalService: app.auth.ILoginModalService) {
             this.authenticationService = authenticationService;
             this.currentUser = currentUser;
+            this.loginModalService = loginModalService;
             this.isAuthenticated = currentUser.isAuthenticated;
             this.password = null;
             this.username = currentUser.username;
@@ -48,6 +52,10 @@ module app.auth {
                         this.currentUser.roles = result.user.roles;
                     }
                 });
+        }
+
+        hideDialog(): void {
+            this.loginModalService.hide();
         }
 
     }
