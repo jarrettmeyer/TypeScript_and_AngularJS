@@ -4,14 +4,19 @@ var expect = chai.expect;
 
 describe('AuthenticationService', (): void => {
 
-    var invalidCredentials, svc, validCredentials;
+    var authService: app.auth.IAuthenticationService;
+    var invalidCredentials: app.auth.ICredentials;
+    var $rootScope: ng.IRootScopeService;
+    var validCredentials: app.auth.ICredentials;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         angular.mock.module('app.auth');
         angular.mock.inject([
             'app.auth.AuthenticationService',
-            (authenticationService) => {
-                svc = authenticationService;
+            '$rootScope',
+            (_authenticationService, _$rootScope) => {
+                authService = _authenticationService;
+                $rootScope = _$rootScope;
             }
         ]);
 
@@ -26,24 +31,27 @@ describe('AuthenticationService', (): void => {
     });
 
     it('assigns the username property when successful', () => {
-        return svc.authenticate(validCredentials)
-            .then((result) => {
+        authService.authenticate(validCredentials)
+            .then((result: app.auth.IAuthenticationResult) => {
                 expect(result.user.username).to.equal('john.doe');
             });
+        $rootScope.$apply();
     });
 
     it('fails when given the wrong password', () => {
-        return svc.authenticate(invalidCredentials)
+        authService.authenticate(invalidCredentials)
             .then((result) => {
                 expect(result.isSuccessful).to.equal(false);
             });
+        $rootScope.$apply();
     });
 
     it('succeeds when given a valid password', () => {
-        return svc.authenticate(validCredentials)
+        authService.authenticate(validCredentials)
             .then((result) => {
                 expect(result.isSuccessful).to.equal(true);
             });
+        $rootScope.$apply();
     });
 
 });

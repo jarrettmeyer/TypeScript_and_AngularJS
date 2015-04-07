@@ -6,37 +6,49 @@ describe('LoginController', () => {
 
     var ctrl: app.auth.ILoginScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
-    var mockCurrentUser: ICurrentUser;
-    var mockUser: IUser;
+    var mockCurrentUser: app.ICurrentUser;
+    var mockUser: app.auth.IUser;
+    var $q: ng.IQService;
+    var $rootScope: ng.IRootScopeService;
 
     beforeEach(() => {
         createUser();
         createCurrentUser();
         createAuthenticationService();
         angular.mock.module('app.auth');
-        angular.mock.inject(($controller) => {
+        angular.mock.inject([
+            '$controller',
+            '$q',
+            '$rootScope',
+            ($controller, _$q, _$rootScope) => {
             ctrl = $controller('app.auth.LoginController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
                 'currentUser': mockCurrentUser
             });
             ctrl.username = 'john.doe';
             ctrl.password = 'myPassword';
-        });
+            $q = _$q;
+            $rootScope = _$rootScope;
+        }]);
     });
 
-    it('can authenticate a username and password', () => {
-        return ctrl.authenticate()
+    it('can authenticate a username and password', (done) => {
+        ctrl.authenticate()
             .then(() => {
                 expect(ctrl.isAuthenticated).to.equal(true);
+                done();
             });
+        $rootScope.$apply();
     });
 
-    it('does not authenticate on authentication failure', () => {
+    it('does not authenticate on authentication failure', (done) => {
         mockUser = null;
-        return ctrl.authenticate()
+        ctrl.authenticate()
             .then(() => {
                 expect(ctrl.isAuthenticated).to.equal(false);
+                done();
             });
+        $rootScope.$apply();
     });
 
     it('is not authenticated by default', function () {
@@ -45,9 +57,14 @@ describe('LoginController', () => {
 
     function createAuthenticationService(): void {
         mockAuthenticationService = {
-            authenticate(credentials: ICredentials): ng.IPromise<app.auth.AuthenticationResult>  {
+            authenticate(credentials: app.auth.ICredentials): ng.IPromise<app.auth.AuthenticationResult>  {
+                if (mockUser) {
+                    mockUser.username = credentials.username;
+                }
                 var result = new app.auth.AuthenticationResult(mockUser);
-                return Promise.resolve(result);
+                var deferred = $q.defer();
+                deferred.resolve(result);
+                return deferred.promise;
             }
         }
     }

@@ -7,7 +7,6 @@
 /// <reference path="./angularjs/angular.d.ts" />
 /// <reference path="./angularjs/angular-mocks.d.ts" />
 /// <reference path="./angularjs/angular-route.d.ts" />
-/// <reference path="./bluebird/bluebird.d.ts" />
 /// <reference path="./bootstrap/bootstrap.d.ts" />
 /// <reference path="./chai/chai.d.ts" />
 /// <reference path="./jquery/jquery.d.ts" />

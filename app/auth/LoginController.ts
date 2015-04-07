@@ -11,11 +11,12 @@ module app.auth {
 
     class LoginController implements ILoginScope {
 
+        $scope: ng.IScope;
+        isAuthenticated: boolean;
         password: string;
         username: string;
-        private _authenticationService: app.auth.IAuthenticationService;
-        private _currentUser: ICurrentUser;
-        private _isAuthenticated: boolean;
+        authenticationService: app.auth.IAuthenticationService;
+        currentUser: ICurrentUser;
 
         static $inject = [
             'app.auth.AuthenticationService',
@@ -23,15 +24,15 @@ module app.auth {
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
                     currentUser: ICurrentUser) {
-            this._authenticationService = authenticationService;
-            this._currentUser = currentUser;
-            this._isAuthenticated = currentUser.isAuthenticated;
+            this.authenticationService = authenticationService;
+            this.currentUser = currentUser;
+            this.isAuthenticated = currentUser.isAuthenticated;
             this.password = null;
             this.username = currentUser.username;
         }
 
-        get isAuthenticated(): boolean {
-            return this._isAuthenticated;
+        get isNotAuthenticated(): boolean {
+            return !this.isAuthenticated;
         }
 
         authenticate(): ng.IPromise<void> {
@@ -39,10 +40,12 @@ module app.auth {
                 username: this.username,
                 password: this.password
             };
-            return this._authenticationService.authenticate(credentials)
+            return this.authenticationService.authenticate(credentials)
                 .then((result) => {
                     if (result.isSuccessful) {
-                        this._isAuthenticated = true;
+                        this.isAuthenticated = true;
+                        this.currentUser.username = result.user.username;
+                        this.currentUser.roles = result.user.roles;
                     }
                 });
         }

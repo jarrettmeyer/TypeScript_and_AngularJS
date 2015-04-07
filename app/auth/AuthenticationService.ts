@@ -13,10 +13,16 @@ module app.auth {
 
     class AuthenticationService implements IAuthenticationService {
 
-        private $log: ng.ILogService;
+        $log: ng.ILogService;
+        $q: ng.IQService;
 
-        static $inject = ['$log'];
-        constructor($log: ng.ILogService) {
+        static $inject = [
+            '$q',
+            '$log'
+        ];
+        constructor($q: ng.IQService,
+                    $log: ng.ILogService) {
+            this.$q = $q;
             this.$log = $log;
         }
 
@@ -26,15 +32,23 @@ module app.auth {
             // service is outside the scope of this example. I am simply checking the password in-memory, looking
             // for the phrase 'password' somewhere in the password.
             //
-            this.$log.info('Attempting to validate user: ', credentials.username + '.');
+            var deferred = this.$q.defer();
+            this.$log.info('Attempting to validate user:', credentials.username + '.');
             var user: IUser = null;
             if (/password/i.test(credentials.password)) {
                 user = AuthenticationService.createUser(credentials);
+                this.$log.info('Login attempt is successful.');
+            } else {
+                this.$log.info('Login attempt failed.');
             }
-            return Promise.resolve(new AuthenticationResult(user));
+            deferred.resolve(new AuthenticationResult(user));
+            return deferred.promise;
         }
 
         static createUser(credentials: ICredentials): IUser {
+            //
+            // Creating a user object. This would come from an API in real life.
+            //
             return {
                 roles: ['admin', 'developer'],
                 username: credentials.username
