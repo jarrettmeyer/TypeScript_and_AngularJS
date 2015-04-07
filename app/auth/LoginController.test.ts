@@ -7,6 +7,7 @@ describe('LoginController', () => {
     var ctrl: app.auth.ILoginScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
     var mockCurrentUser: app.ICurrentUser;
+    var mockLoginModalService: app.auth.ILoginModalService;
     var mockUser: app.auth.IUser;
     var $q: ng.IQService;
     var $rootScope: ng.IRootScopeService;
@@ -14,6 +15,7 @@ describe('LoginController', () => {
     beforeEach(() => {
         createUser();
         createCurrentUser();
+        createLoginModalService();
         createAuthenticationService();
         angular.mock.module('app.auth');
         angular.mock.inject([
@@ -23,7 +25,8 @@ describe('LoginController', () => {
             ($controller, _$q, _$rootScope) => {
             ctrl = $controller('app.auth.LoginController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
-                'currentUser': mockCurrentUser
+                'currentUser': mockCurrentUser,
+                'app.auth.LoginModalService': mockLoginModalService
             });
             ctrl.username = 'john.doe';
             ctrl.password = 'myPassword';
@@ -71,6 +74,14 @@ describe('LoginController', () => {
 
     function createCurrentUser(): void {
         mockCurrentUser = new app.CurrentUser();
+    }
+
+    function createLoginModalService(): void {
+        mockLoginModalService = {
+            isShown: false,
+            hide(): void { },
+            show(): void { }
+        };
     }
 
     function createUser(): void {
