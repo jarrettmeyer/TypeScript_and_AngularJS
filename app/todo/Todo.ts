@@ -7,11 +7,11 @@ module app.todo {
         description: string;
         dueAt: string;
         id: number;
-        isActive: boolean;
-        isCompleted: boolean;
-        isPastDue: boolean;
 
         complete(): void;
+        isActive(): boolean;
+        isCompleted(): boolean;
+        isPastDue(): boolean;
     }
 
     export class Todo implements ITodo {
@@ -20,15 +20,19 @@ module app.todo {
         dueAt: string;
         id: number;
 
-        get isActive(): boolean {
+        complete(): void {
+            this.completedAt = (new Date()).toISOString();
+        }
+
+        isActive(): boolean {
             return !this.completedAt;
         }
 
-        get isCompleted(): boolean {
+        isCompleted(): boolean {
             return !!this.completedAt;
         }
 
-        get isPastDue(): boolean {
+        isPastDue(): boolean {
             // If no dueAt, then impossible to be past due.
             if (!this.dueAt) {
                 return false;
@@ -37,10 +41,6 @@ module app.todo {
                 return new Date(this.completedAt) > new Date(this.dueAt);
             }
             return new Date() > new Date(this.dueAt);
-        }
-
-        complete(): void {
-            this.completedAt = (new Date()).toISOString();
         }
     }
 

@@ -28,3 +28,4 @@
 /// <reference path="../../app/services/localStorage.ts" />
 /// <reference path="../../app/services/TodoService.ts" />
 /// <reference path="../../app/todo/Todo.ts" />
+/// <reference path="../../app/todo/TodoModalService.ts" />

@@ -5,6 +5,7 @@ module app.services {
     export interface ITodoService {
         clear(): void;
         getAll(): ng.IPromise<app.todo.ITodo[]>;
+        getAllActive(): ng.IPromise<app.todo.ITodo[]>;
         getById(id: number): ng.IPromise<app.todo.ITodo>;
         save(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo>;
     }
@@ -42,8 +43,16 @@ module app.services {
         }
 
         commit(): void {
-            this.localStorage.setItem('todos', JSON.stringify(this.todos));
-            this.$log.debug('Saved ' + this.todos.length + ' todos.');
+            var todos = this.todos.map(function (todo) {
+                return {
+                    completedAt: todo.completedAt,
+                    description: todo.description,
+                    dueAt: todo.dueAt,
+                    id: todo.id
+                }
+            });
+            this.localStorage.setItem('todos', JSON.stringify(todos));
+            this.$log.debug('Saved ' + todos.length + ' todos.');
         }
 
         create(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo> {
@@ -60,6 +69,15 @@ module app.services {
             var deferred = this.$q.defer();
             deferred.resolve(this.todos);
             return deferred.promise;
+        }
+
+        getAllActive(): ng.IPromise<app.todo.ITodo[]> {
+            return this.getAll()
+                .then((result) => {
+                    return result.filter((todo) => {
+                        return todo.isActive();
+                    });
+                });
         }
 
         getById(id: number): ng.IPromise<app.todo.ITodo> {
