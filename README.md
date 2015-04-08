@@ -64,6 +64,9 @@ Alternatively, you can do all of this in a single step with grunt.
 $ grunt build:dev
 ```
 
+The application runs inside a [Vagrant](https://www.vagrantup.com) virtual machine. Run `vagrant up` from the project root. From there, you 
+should be able to navigate to [http://localhost:8080](http://localhost:8080) to see the application run.
+
 ## Running Tests
 
 Unit tests are run with [Karma](http://karma-runner.github.io/0.12/index.html). You will first need to transpile the
