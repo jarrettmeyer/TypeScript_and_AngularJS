@@ -16,6 +16,7 @@
 
 // --- Application classes ---
 /// <reference path="../../app/app.CurrentUser.ts" />
+/// <reference path="../../app/app.PreviousLoginHandler.ts" />
 /// <reference path="../../app/app.RouteChangeHandler.ts" />
 /// <reference path="../../app/auth/AuthenticationResult.ts" />
 /// <reference path="../../app/auth/AuthenticationService.ts" />

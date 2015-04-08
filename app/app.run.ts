@@ -8,10 +8,13 @@
         .run(run);
 
     run.$inject = [
-        'app.RouteChangeHandler'
+        'app.RouteChangeHandler',
+        'app.PreviousLoginHandler'
     ];
-    function run(routeChangeHandler: app.IRouteChangeHandler): void {
+    function run(routeChangeHandler: app.IRouteChangeHandler,
+                 previousLoginHandler: app.IPreviousLoginHandler): void {
         routeChangeHandler.initialize();
+        previousLoginHandler.initialize();
     }
 
 })();
