@@ -6,8 +6,8 @@ describe('LoginController', () => {
 
     var ctrl: app.auth.ILoginScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
-    var mockCookieService: app.services.ICookieService;
     var mockCurrentUser: app.ICurrentUser;
+    var mockLocalStorage: any;
     var mockLoginModalService: app.auth.ILoginModalService;
     var mockUser: app.auth.IUser;
     var $q: ng.IQService;
@@ -17,7 +17,7 @@ describe('LoginController', () => {
         createUser();
         createAuthenticationService();
         createCurrentUser();
-        createCookieService();
+        createLocalStorage();
         createLoginModalService();
         angular.mock.module('app.auth');
         angular.mock.inject([
@@ -28,7 +28,7 @@ describe('LoginController', () => {
             ctrl = $controller('app.auth.LoginController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
                 'currentUser': mockCurrentUser,
-                'app.services.CookieService': mockCookieService,
+                'localStorage': mockLocalStorage,
                 'app.auth.LoginModalService': mockLoginModalService
             });
             ctrl.username = 'john.doe';
@@ -36,6 +36,10 @@ describe('LoginController', () => {
             $q = _$q;
             $rootScope = _$rootScope;
         }]);
+    });
+
+    afterEach((): void => {
+        localStorage.clear();
     });
 
     it('can authenticate a username and password', (done) => {
@@ -75,12 +79,12 @@ describe('LoginController', () => {
         }
     }
 
-    function createCookieService(): void {
-        mockCookieService = {
-            username: '',
-            roles: [],
-            reset() { }
-        };
+    function createLocalStorage(): void {
+        //mockLocalStorage = {
+        //    username: '',
+        //    roles: [],
+        //    reset() { }
+        //};
     }
 
     function createCurrentUser(): void {

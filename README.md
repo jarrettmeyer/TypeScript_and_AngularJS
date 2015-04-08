@@ -12,9 +12,23 @@ This is a demo application showing how to build an AngularJS application with Ty
     `scripts/typings`.
 + The `scripts/typings/all.d.ts` is used as a shortcut for having lots of references at the top of your `*.ts` files.
 
+### app.auth
+
+Files necessary for authorization. Traditionally, and API would be used to support authentication. Writing an API is 
+beyond the scope of this example, so the password is simply checked in memory. As long as your password contains the 
+string `password`, it should succeed.
+
 ### app.layout
 
 This is for primary layout components.
+
+### app.services
+
+### app.todo
+
+### app.welcome
+
+This is the welcome page for the application.
 
 ### app.widgets
 

@@ -6,13 +6,13 @@
         //
         // Globally required modules.
         //
-        'ngCookies',
         'ngRoute',
         //
         // Application modules.
         //
         'app.auth',
         'app.layout',
+        'app.services',
         'app.todo',
         'app.welcome',
         'app.widgets'

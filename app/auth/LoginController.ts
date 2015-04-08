@@ -13,9 +13,9 @@ module app.auth {
     class LoginController implements ILoginScope {
 
         authenticationService: app.auth.IAuthenticationService;
-        cookieService: app.services.ICookieService;
         currentUser: ICurrentUser;
         isAuthenticated: boolean;
+        localStorage: Storage;
         loginModalService: app.auth.ILoginModalService;
         password: string;
         username: string;
@@ -23,16 +23,16 @@ module app.auth {
         static $inject = [
             'app.auth.AuthenticationService',
             'currentUser',
-            'app.services.CookieService',
+            'localStorage',
             'app.auth.LoginModalService'
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
                     currentUser: ICurrentUser,
-                    cookieService: app.services.ICookieService,
+                    localstorage: Storage,
                     loginModalService: app.auth.ILoginModalService) {
             this.authenticationService = authenticationService;
             this.currentUser = currentUser;
-            this.cookieService = cookieService;
+            this.localStorage = localStorage;
             this.loginModalService = loginModalService;
             this.initialize();
         }
@@ -67,8 +67,8 @@ module app.auth {
         }
 
         updateCookie(user: app.auth.IUser): void {
-            this.cookieService.username = user.username;
-            this.cookieService.roles = user.roles;
+            this.localStorage.setItem('username', user.username);
+            this.localStorage.setItem('roles', JSON.stringify(user.roles));
         }
 
         updateCurrentUser(user: app.auth.IUser): void {
