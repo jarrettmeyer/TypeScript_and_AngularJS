@@ -81,5 +81,5 @@ module app.auth {
     angular
         .module('app.auth')
         .controller('app.auth.LoginController', LoginController);
-    
+
 }
