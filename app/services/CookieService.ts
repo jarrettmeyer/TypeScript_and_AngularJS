@@ -9,7 +9,14 @@ module app.services {
         reset(): void;
     }
 
-
+    //
+    // TODO: This version of the CookieService uses the Angular 1.3.15 version of
+    //       ngCookies. This will be changing in version 1.4.0. Instead of using
+    //       properties on $cookies, the service will have get(), put(), and
+    //       remove() functions.
+    //
+    //       See https://docs.angularjs.org/api/ngCookies/service/$cookies
+    //
     export class CookieService implements ICookieService {
         cookieService: any;
 
