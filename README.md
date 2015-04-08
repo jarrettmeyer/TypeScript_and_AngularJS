@@ -38,34 +38,20 @@ section of the application the user is working under.
 
 ## Running the Application
 
-First, install everything that you need to install. Change to the project root directory and install the npm and bower
-dependencies.
+I am assuming that you have [NodeJS](https://nodejs.org) already installed. The commands shown below are for Mac/Linux.
+Omit the `sudo` if you are running on Windows.
 
 ```
+$ sudo npm install -g bower grunt-cli karma-cli
 $ npm install
 $ bower install
-```
-
-Second, you will need to transpile the TypeScript to JavaScript.
-
-```
-$ grunt ts
-```
-
-Next, you will need to concatenate the JS into a single file.
-
-```
-$ grunt concat
-```
-
-Alternatively, you can do all of this in a single step with grunt.
-
-```
 $ grunt build:dev
+$ vagrant up
 ```
 
-The application runs inside a [Vagrant](https://www.vagrantup.com) virtual machine. Run `vagrant up` from the project root. From there, you 
-should be able to navigate to [http://localhost:8080](http://localhost:8080) to see the application run.
+The application runs inside a [Vagrant](https://www.vagrantup.com) virtual machine. Run `vagrant up` from the project 
+root. From there, you  should be able to navigate to [http://localhost:8080](http://localhost:8080) to see the 
+application run.
 
 ## Running Tests
 
@@ -74,9 +60,6 @@ TypeScript to JavaScript, then run the tests.
 
 ```
 $ grunt ts
-```
-
-```
 $ karma start
 ```
 
