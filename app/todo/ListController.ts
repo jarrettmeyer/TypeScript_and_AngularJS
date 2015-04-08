@@ -29,7 +29,6 @@ module app.todo {
             this.$log.debug('Completing todo ' + id + '.');
             this.todoService.getById(id)
                 .then((result) => {
-                    this.$log.debug('Found todo: ', result);
                     result.complete();
                     return this.todoService.save(result);
                 });

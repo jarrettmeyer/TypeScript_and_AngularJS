@@ -1,7 +1,7 @@
 <div ng-controller="app.todo.ListController as list">
 
     <div class="page-header">
-        <h2>Task List</h2>
+        <h2>Todo List</h2>
     </div>
 
     <table class="table table-condensed">
@@ -21,7 +21,7 @@
                 <td>{{todo.dueAt}}</td>
                 <td>{{todo.completedAt}}</td>
                 <td>
-                    <button type="button" class="btn btn-default" ng-click="list.complete(todo.id)">
+                    <button type="button" class="btn btn-default" ng-click="list.complete(todo.id)" ng-show="todo.isActive">
                         Complete
                     </button>
                 </td>

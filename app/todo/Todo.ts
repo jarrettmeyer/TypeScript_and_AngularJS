@@ -7,6 +7,7 @@ module app.todo {
         description: string;
         dueAt: string;
         id: number;
+        isActive: boolean;
         isCompleted: boolean;
         isPastDue: boolean;
 
@@ -18,6 +19,10 @@ module app.todo {
         description: string;
         dueAt: string;
         id: number;
+
+        get isActive(): boolean {
+            return !this.completedAt;
+        }
 
         get isCompleted(): boolean {
             return !!this.completedAt;

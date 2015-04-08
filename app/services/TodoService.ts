@@ -11,6 +11,7 @@ module app.services {
 
     export class TodoService implements ITodoService {
 
+        $log: ng.ILogService;
         $q: ng.IQService;
         localStorage: Storage;
         maxId: number = 0;
@@ -18,12 +19,15 @@ module app.services {
 
         static $inject = [
             'localStorage',
-            '$q'
+            '$q',
+            '$log'
         ];
         constructor(localStorage: Storage,
-                    $q: ng.IQService) {
+                    $q: ng.IQService,
+                    $log: ng.ILogService) {
             this.localStorage = localStorage;
             this.$q = $q;
+            this.$log = $log;
             this.initialize();
         }
 
@@ -39,6 +43,7 @@ module app.services {
 
         commit(): void {
             this.localStorage.setItem('todos', JSON.stringify(this.todos));
+            this.$log.debug('Saved ' + this.todos.length + ' todos.');
         }
 
         create(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo> {
@@ -85,7 +90,7 @@ module app.services {
                 todo.id = todos[i].id;
                 todo.description = todos[i].description;
                 todo.dueAt = todos[i].dueAt;
-                todo.completedAt = todos[i].completeAt;
+                todo.completedAt = todos[i].completedAt;
                 if (todos[i].id > this.maxId) {
                     this.maxId = todos[i].id;
                 }
