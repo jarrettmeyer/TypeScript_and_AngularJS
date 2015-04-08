@@ -25,4 +25,5 @@
 /// <reference path="../../app/services/CookieService.ts" />
 /// <reference path="../../app/services/jQuery.ts" />
 /// <reference path="../../app/services/localStorage.ts" />
+/// <reference path="../../app/services/TodoService.ts" />
 /// <reference path="../../app/todo/Todo.ts" />
