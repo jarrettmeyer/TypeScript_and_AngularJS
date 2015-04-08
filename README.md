@@ -5,6 +5,13 @@ This is a demo application showing how to build an AngularJS application with Ty
 
 ## About This Application
 
++ Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, services, etc.). The
+    exception to this is the `services` folder, which is for services that are consumed by multiple features.
++ Tests are kept next to the files they are meant to test.
++ [tsd](https://github.com/DefinitelyTyped/tsd) is used to download TypeScript definition files. These files are kept in
+    `scripts/typings`.
++ The `scripts/typings/all.d.ts` is used as a shortcut for having lots of references at the top of your `*.ts` files.
+
 ### app.layout
 
 This is for primary layout components.
@@ -17,7 +24,15 @@ section of the application the user is working under.
 
 ## Running the Application
 
-First, you will need to transpile the TypeScript to JavaScript.
+First, install everything that you need to install. Change to the project root directory and install the npm and bower
+dependencies.
+
+```
+$ npm install
+$ bower install
+```
+
+Second, you will need to transpile the TypeScript to JavaScript.
 
 ```
 $ grunt ts
@@ -48,11 +63,9 @@ $ grunt ts
 $ karma start
 ```
 
-When developing, I have two terminal windows open at all times. 
-
-The first window is running `grunt watch`. This is watching all `*.ts` files for modifications and creating the
-corresponding `*.js` files. It is then watching all `*.js` files for modifications and concatenating them into a
-single `app.js` file.
+When developing, I have two terminal windows open at all times.  The first window is running `grunt watch`. This is 
+watching all `*.ts` files for modifications and creating the corresponding `*.js` files. It is then watching all 
+`*.js` files for modifications and concatenating them into a single `app.js` file.
 
 The second terminal window is running `karma` (via the `karma start` command).
 
