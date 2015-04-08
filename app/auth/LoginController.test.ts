@@ -6,6 +6,7 @@ describe('LoginController', () => {
 
     var ctrl: app.auth.ILoginScope;
     var mockAuthenticationService: app.auth.IAuthenticationService;
+    var mockCookieService: app.services.ICookieService;
     var mockCurrentUser: app.ICurrentUser;
     var mockLoginModalService: app.auth.ILoginModalService;
     var mockUser: app.auth.IUser;
@@ -14,9 +15,10 @@ describe('LoginController', () => {
 
     beforeEach(() => {
         createUser();
-        createCurrentUser();
-        createLoginModalService();
         createAuthenticationService();
+        createCurrentUser();
+        createCookieService();
+        createLoginModalService();
         angular.mock.module('app.auth');
         angular.mock.inject([
             '$controller',
@@ -26,6 +28,7 @@ describe('LoginController', () => {
             ctrl = $controller('app.auth.LoginController', {
                 'app.auth.AuthenticationService': mockAuthenticationService,
                 'currentUser': mockCurrentUser,
+                'app.services.CookieService': mockCookieService,
                 'app.auth.LoginModalService': mockLoginModalService
             });
             ctrl.username = 'john.doe';
@@ -70,6 +73,14 @@ describe('LoginController', () => {
                 return deferred.promise;
             }
         }
+    }
+
+    function createCookieService(): void {
+        mockCookieService = {
+            username: '',
+            roles: [],
+            reset() { }
+        };
     }
 
     function createCurrentUser(): void {

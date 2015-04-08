@@ -13,6 +13,7 @@ module app.auth {
     class LoginController implements ILoginScope {
 
         authenticationService: app.auth.IAuthenticationService;
+        cookieService: app.services.ICookieService;
         currentUser: ICurrentUser;
         isAuthenticated: boolean;
         loginModalService: app.auth.ILoginModalService;
@@ -22,17 +23,18 @@ module app.auth {
         static $inject = [
             'app.auth.AuthenticationService',
             'currentUser',
+            'app.services.CookieService',
             'app.auth.LoginModalService'
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
                     currentUser: ICurrentUser,
+                    cookieService: app.services.ICookieService,
                     loginModalService: app.auth.ILoginModalService) {
             this.authenticationService = authenticationService;
             this.currentUser = currentUser;
+            this.cookieService = cookieService;
             this.loginModalService = loginModalService;
-            this.isAuthenticated = currentUser.isAuthenticated;
-            this.password = null;
-            this.username = currentUser.username;
+            this.initialize();
         }
 
         get isNotAuthenticated(): boolean {
@@ -48,8 +50,8 @@ module app.auth {
                 .then((result) => {
                     if (result.isSuccessful) {
                         this.isAuthenticated = true;
-                        this.currentUser.username = result.user.username;
-                        this.currentUser.roles = result.user.roles;
+                        this.updateCurrentUser(result.user);
+                        this.updateCookie(result.user);
                     }
                 });
         }
@@ -58,9 +60,26 @@ module app.auth {
             this.loginModalService.hide();
         }
 
+        initialize(): void {
+            this.password = null;
+            this.username = this.currentUser.username;
+            this.isAuthenticated = this.currentUser.isAuthenticated;
+        }
+
+        updateCookie(user: app.auth.IUser): void {
+            this.cookieService.username = user.username;
+            this.cookieService.roles = user.roles;
+        }
+
+        updateCurrentUser(user: app.auth.IUser): void {
+            this.currentUser.username = user.username;
+            this.currentUser.roles = user.roles;
+        }
     }
+
 
     angular
         .module('app.auth')
         .controller('app.auth.LoginController', LoginController);
+    
 }
