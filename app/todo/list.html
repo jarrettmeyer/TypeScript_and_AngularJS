@@ -1,3 +1,32 @@
 <div ng-controller="app.todo.ListController as list">
 
+    <div class="page-header">
+        <h2>Task List</h2>
+    </div>
+
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Due</th>
+                <th>Completed</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="todo in list.getAll()">
+                <td>{{todo.id}}</td>
+                <td>{{todo.description}}</td>
+                <td>{{todo.dueAt}}</td>
+                <td>{{todo.completedAt}}</td>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="list.complete(todo.id)">
+                        Complete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>

@@ -3,11 +3,9 @@
 module app.services {
 
     export interface ITodoService {
-        /**
-         * Deletes all todos.
-         */
         clear(): void;
         getAll(): ng.IPromise<app.todo.ITodo[]>;
+        getById(id: number): ng.IPromise<app.todo.ITodo>;
         save(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo>;
     }
 
@@ -59,9 +57,16 @@ module app.services {
             return deferred.promise;
         }
 
-        getIndex(todo: app.todo.ITodo): number {
+        getById(id: number): ng.IPromise<app.todo.ITodo> {
+            var deferred = this.$q.defer();
+            var index = this.getIndexOfId(id);
+            deferred.resolve(this.todos[index]);
+            return deferred.promise;
+        }
+
+        getIndexOfId(id: number): number {
             for (var i = 0; i < this.todos.length; i += 1) {
-                if (this.todos[i].id === todo.id) {
+                if (this.todos[i].id === id) {
                     return i;
                 }
             }
@@ -73,7 +78,19 @@ module app.services {
         }
 
         initialize(): void {
-            this.todos = this.localStorage.getItem('todos') || [];
+            this.todos = [];
+            var todos = JSON.parse(this.localStorage.getItem('todos') || '[]');
+            for (var i = 0; i < todos.length; i += 1) {
+                var todo = new app.todo.Todo();
+                todo.id = todos[i].id;
+                todo.description = todos[i].description;
+                todo.dueAt = todos[i].dueAt;
+                todo.completedAt = todos[i].completeAt;
+                if (todos[i].id > this.maxId) {
+                    this.maxId = todos[i].id;
+                }
+                this.todos.push(todo);
+            }
         }
 
         save(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo> {
@@ -86,7 +103,7 @@ module app.services {
 
         remove(todo: app.todo.ITodo): ng.IPromise<boolean> {
             var deferred = this.$q.defer();
-            var index = this.getIndex(todo);
+            var index = this.getIndexOfId(todo.id);
             if (index < 0) {
                 throw new Error('Unable to find existing todo with id: ' + todo.id + '.');
             }
@@ -97,13 +114,15 @@ module app.services {
         }
 
         update(todo: app.todo.ITodo): ng.IPromise<app.todo.ITodo> {
-            var index = this.getIndex(todo);
+            var deferred = this.$q.defer();
+            var index = this.getIndexOfId(todo.id);
             if (index < 0) {
                 throw new Error('Unable to find existing todo with id: ' + todo.id + '.');
             }
             this.todos[index] = todo;
+            deferred.resolve(todo);
             this.commit();
-            return null;
+            return deferred.promise;
         }
 
     }
