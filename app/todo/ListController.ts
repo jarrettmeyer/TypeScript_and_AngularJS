@@ -6,14 +6,13 @@ module app.todo {
         add(): void;
         complete(id: number): void;
         edit(todo: app.todo.ITodo): void;
-        getAll(): app.todo.ITodo[];
+        getAllActive(): app.todo.ITodo[];
     }
 
     export class ListController implements IListScope {
 
         $log: ng.ILogService;
         $rootScope: ng.IRootScopeService;
-        isInitialized: boolean = false;
         todoModalService: app.todo.ITodoModalService;
         todoService: app.services.ITodoService;
         todos: app.todo.ITodo[];

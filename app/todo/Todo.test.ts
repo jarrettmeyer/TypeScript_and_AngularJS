@@ -14,7 +14,7 @@ describe('app.todo.Todo', () => {
     it('completes a todo', () => {
         todo.complete();
         expect(todo.completedAt).to.match(/^\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-        expect(todo.isCompleted).to.equal(true);
+        expect(todo.isCompleted()).to.equal(true);
     });
 
     it('sets and gets a description', () => {
@@ -26,18 +26,18 @@ describe('app.todo.Todo', () => {
 
         it('returns false when the todo is not completed and not past due', () => {
             todo.dueAt = tomorrow;
-            expect(todo.isPastDue).to.equal(false);
+            expect(todo.isPastDue()).to.equal(false);
         });
 
         it('returns true when the todo is completed after the due date', () => {
             todo.dueAt = yesterday;
             todo.complete();
-            expect(todo.isPastDue).to.equal(true);
+            expect(todo.isPastDue()).to.equal(true);
         });
 
         it('returns true when the todo is past due', () => {
             todo.dueAt = yesterday;
-            expect(todo.isPastDue).to.equal(true);
+            expect(todo.isPastDue()).to.equal(true);
         });
 
     });
