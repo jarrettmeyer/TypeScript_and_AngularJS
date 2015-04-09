@@ -4,106 +4,117 @@ var expect = chai.expect;
 
 describe('LoginController', () => {
 
-    var ctrl: app.auth.ILoginScope;
-    var mockAuthenticationService: app.auth.IAuthenticationService;
-    var mockCurrentUser: app.ICurrentUser;
-    var mockLocalStorage: any;
-    var mockLoginModalService: app.auth.ILoginModalService;
-    var mockUser: app.auth.IUser;
+    var authenticationService: any;
+    var currentUser: any;
+    var localStorage: any;
+    var loginController: app.auth.ILoginScope;
+    var loginModalService: any;
     var $q: ng.IQService;
     var $rootScope: ng.IRootScopeService;
 
     beforeEach(() => {
-        createUser();
-        createAuthenticationService();
-        createCurrentUser();
-        createLocalStorage();
-        createLoginModalService();
+        authenticationService = {
+            authenticate: () => {}
+        };
+        currentUser = {
+            isAuthenticated: false
+        };
+        localStorage = {};
+        loginModalService = {};
         angular.mock.module('app.auth');
         angular.mock.inject([
             '$controller',
-            '$q',
             '$rootScope',
-            ($controller, _$q, _$rootScope) => {
-            ctrl = $controller('app.auth.LoginController', {
-                'app.auth.AuthenticationService': mockAuthenticationService,
-                'currentUser': mockCurrentUser,
-                'localStorage': mockLocalStorage,
-                'app.auth.LoginModalService': mockLoginModalService
-            });
-            ctrl.username = 'john.doe';
-            ctrl.password = 'myPassword';
-            $q = _$q;
-            $rootScope = _$rootScope;
-        }]);
+            '$q',
+            (_$controller, _$rootScope, _$q) => {
+                loginController = _$controller(
+                    'app.auth.LoginController',
+                    {
+                        'app.auth.AuthenticationService': authenticationService,
+                        'currentUser': currentUser,
+                        'localStorage': localStorage,
+                        'app.auth.LoginModalService': loginModalService
+                    }
+                );
+                $rootScope = _$rootScope;
+                $q = _$q;
+            }
+        ]);
     });
 
     afterEach((): void => {
-        localStorage.clear();
     });
 
-    it('can authenticate a username and password', (done) => {
-        ctrl.authenticate()
-            .then(() => {
-                expect(ctrl.isAuthenticated).to.equal(true);
-                done();
-            });
-        $rootScope.$apply();
+    it('is not authenticated by default', () => {
+        expect(loginController.isAuthenticated).to.equal(false);
     });
 
-    it('does not authenticate on authentication failure', (done) => {
-        mockUser = null;
-        ctrl.authenticate()
-            .then(() => {
-                expect(ctrl.isAuthenticated).to.equal(false);
-                done();
-            });
-        $rootScope.$apply();
+    describe('authenticate (success)', () => {
+
+        beforeEach(() => {
+            setupAuthentication();
+        });
+
+        it('calls the authentication service with the expected credentials', (done) => {
+            var spy = sinon.spy(authenticationService, 'authenticate');
+            loginController.username = 'hello';
+            loginController.password = 'world';
+            var expectedCredentials = {
+                username: 'hello',
+                password: 'world'
+            };
+            loginController.authenticate()
+                .then(() => {
+                    expect(spy.calledWith(expectedCredentials)).to.equal(true);
+                    done();
+                });
+            $rootScope.$apply();
+        });
+
+        it('can authenticate a username and password', (done) => {
+            loginController.authenticate()
+                .then(() => {
+                    expect(loginController.isAuthenticated).to.equal(true);
+                    done();
+                });
+            $rootScope.$apply();
+        });
+
+        it('sets the roles in local storage', (done) => {
+            var spy = sinon.spy(localStorage, 'setItem');
+            loginController.authenticate()
+                .then(() => {
+                    expect(spy.calledWith('roles')).to.equal(true);
+                    done();
+                });
+            $rootScope.$apply();
+        });
+
+        it('sets the username in local storage', (done) => {
+            var spy = sinon.spy(localStorage, 'setItem');
+            loginController.authenticate()
+                .then(() => {
+                    expect(spy.calledWith('username')).to.equal(true);
+                    done();
+                });
+            $rootScope.$apply();
+        });
+
     });
 
-    it('is not authenticated by default', function () {
-        expect(ctrl.isAuthenticated).to.equal(false);
-    });
-
-    function createAuthenticationService(): void {
-        mockAuthenticationService = {
-            authenticate(credentials: app.auth.ICredentials): ng.IPromise<app.auth.AuthenticationResult>  {
-                if (mockUser) {
-                    mockUser.username = credentials.username;
+    function setupAuthentication() {
+        authenticationService.authenticate = () => {
+            var deferred = $q.defer();
+            deferred.resolve({
+                isSuccessful: true,
+                user: {
+                    username: 'john.doe',
+                    roles: ['admin', 'tester']
                 }
-                var result = new app.auth.AuthenticationResult(mockUser);
-                var deferred = $q.defer();
-                deferred.resolve(result);
-                return deferred.promise;
-            }
-        }
-    }
-
-    function createLocalStorage(): void {
-        //mockLocalStorage = {
-        //    username: '',
-        //    roles: [],
-        //    reset() { }
-        //};
-    }
-
-    function createCurrentUser(): void {
-        mockCurrentUser = new app.CurrentUser();
-    }
-
-    function createLoginModalService(): void {
-        mockLoginModalService = {
-            isShown: false,
-            hide(): void { },
-            show(): void { }
+            });
+            return deferred.promise;
         };
-    }
-
-    function createUser(): void {
-        mockUser = {
-            roles: ['admin'],
-            username: 'john.doe'
-        };
+        localStorage.setItem = () => { };
     }
 
 });

@@ -8,9 +8,12 @@ module app.auth {
         username: string;
         authenticate(): ng.IPromise<void>;
         hideDialog(): void;
+        isFooterVisible(): boolean;
+        isLoginFormVisible(): boolean;
+        isSuccessAlertVisible(): boolean;
     }
 
-    class LoginController implements ILoginScope {
+    export class LoginController implements ILoginScope {
 
         authenticationService: app.auth.IAuthenticationService;
         currentUser: ICurrentUser;
@@ -28,17 +31,13 @@ module app.auth {
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
                     currentUser: ICurrentUser,
-                    localstorage: Storage,
+                    localStorage: Storage,
                     loginModalService: app.auth.ILoginModalService) {
             this.authenticationService = authenticationService;
             this.currentUser = currentUser;
             this.localStorage = localStorage;
             this.loginModalService = loginModalService;
             this.initialize();
-        }
-
-        get isNotAuthenticated(): boolean {
-            return !this.isAuthenticated;
         }
 
         authenticate(): ng.IPromise<void> {
@@ -51,7 +50,7 @@ module app.auth {
                     if (result.isSuccessful) {
                         this.isAuthenticated = true;
                         this.updateCurrentUser(result.user);
-                        this.updateCookie(result.user);
+                        this.updateLocalStorage(result.user);
                     }
                 });
         }
@@ -66,14 +65,26 @@ module app.auth {
             this.isAuthenticated = this.currentUser.isAuthenticated;
         }
 
-        updateCookie(user: app.auth.IUser): void {
-            this.localStorage.setItem('username', user.username);
-            this.localStorage.setItem('roles', JSON.stringify(user.roles));
+        isFooterVisible(): boolean {
+            return !this.isAuthenticated;
+        }
+
+        isLoginFormVisible(): boolean {
+            return !this.isAuthenticated;
+        }
+
+        isSuccessAlertVisible(): boolean {
+            return this.isAuthenticated;
         }
 
         updateCurrentUser(user: app.auth.IUser): void {
             this.currentUser.username = user.username;
             this.currentUser.roles = user.roles;
+        }
+
+        updateLocalStorage(user: app.auth.IUser): void {
+            this.localStorage.setItem('username', user.username);
+            this.localStorage.setItem('roles', JSON.stringify(user.roles));
         }
     }
 
