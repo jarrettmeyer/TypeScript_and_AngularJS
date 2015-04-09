@@ -6,24 +6,34 @@ module app.layout {
     export interface INavigationScope {
         isAuthenticated: boolean;
         username: string;
+        logout(): void;
     }
 
     export class NavigationController implements INavigationScope {
 
-        private _currentUser: ICurrentUser;
+        currentUser: ICurrentUser;
+        logoutService: app.auth.ILogoutService;
 
-        static $inject = ['currentUser'];
-        constructor(currentUser: ICurrentUser) {
-            var vm = this;
-            vm._currentUser = currentUser;
+        static $inject = [
+            'currentUser',
+            'app.auth.LogoutService'
+        ];
+        constructor(currentUser: ICurrentUser,
+                    logoutService: app.auth.ILogoutService) {
+            this.currentUser = currentUser;
+            this.logoutService = logoutService;
         }
 
         get isAuthenticated(): boolean {
-            return this._currentUser.isAuthenticated;
+            return this.currentUser.isAuthenticated;
         }
 
         get username(): string {
-            return this._currentUser.username;
+            return this.currentUser.username;
+        }
+
+        logout(): void {
+            this.logoutService.logout();
         }
 
     }

@@ -22,6 +22,7 @@
 /// <reference path="../../app/auth/AuthenticationService.ts" />
 /// <reference path="../../app/auth/LoginController.ts" />
 /// <reference path="../../app/auth/LoginModalService.ts" />
+/// <reference path="../../app/auth/LogoutService.ts" />
 /// <reference path="../../app/layout/NavigationController.ts" />
 /// <reference path="../../app/services/CookieService.ts" />
 /// <reference path="../../app/services/jQuery.ts" />
