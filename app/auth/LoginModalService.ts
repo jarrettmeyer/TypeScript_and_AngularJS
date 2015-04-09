@@ -12,7 +12,6 @@ module app.auth {
 
         element: JQuery;
         jQuery: JQueryStatic;
-        isShown: boolean;
         selector: string = '#login-modal';
 
         static $inject = [
@@ -20,7 +19,6 @@ module app.auth {
         ];
         constructor(jQuery: JQueryStatic) {
             this.jQuery = jQuery;
-            this.isShown = false;
         }
 
         assertElement(): void {
@@ -32,13 +30,11 @@ module app.auth {
         hide(): void {
             this.assertElement();
             this.element.modal('hide');
-            this.isShown = false;
         }
 
         show(): void {
             this.assertElement();
             this.element.modal('show');
-            this.isShown = true;
         }
     }
 

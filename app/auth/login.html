@@ -2,10 +2,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="alert alert-success" ng-show="login.isAuthenticated">
+                <div class="alert alert-success" ng-show="login.isSuccessAlertVisible()">
                     Login successful! <a href="#" ng-click="login.hideDialog()">You can close this window</a>.
                 </div>
-                <div ng-show="login.isNotAuthenticated">
+                <div ng-show="login.isLoginFormVisible()">
                     <form role="form">
                         <div class="form-group">
                             <label for="username">Username</label>
@@ -19,7 +19,7 @@
                     </form>
                 </div>
             </div>
-            <div class="modal-footer" ng-show="login.isNotAuthenticated">
+            <div class="modal-footer" ng-show="login.isFooterVisible()">
                 <button type="button" class="btn btn-default" ng-click="login.hideDialog()">Close</button>
                 <button type="button" class="btn btn-primary" ng-click="login.authenticate()">Login</button>
             </div>
