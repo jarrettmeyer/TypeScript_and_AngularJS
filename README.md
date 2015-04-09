@@ -53,7 +53,7 @@ The application runs inside a [Vagrant](https://www.vagrantup.com) virtual machi
 root. From there, you  should be able to navigate to [http://localhost:8080](http://localhost:8080) to see the 
 application run.
 
-If you make changes to the code, you will need to run `grunt build:dev` to transpile the TypeScript to JavaScript and concatenate the results into a single `app.js` file.
+If you make changes to the code, you will need to run `grunt build:dev` to transpile the TypeScript to JavaScript and concatenate the results into a single `app.js` file. Then [re]run the app to see the results of your change(s).
 
 ## Running Tests
 
