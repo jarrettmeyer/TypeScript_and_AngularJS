@@ -3,7 +3,6 @@
 module app.auth {
 
     export interface ILoginModalService {
-        isShown: boolean;
         hide(): void;
         show(): void;
     }
