@@ -12,6 +12,7 @@ module.exports = function(config) {
             'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-route/angular-route.js',
+            'bower_components/sinon-1.14.1/index.js',
             'app/app.module.js',
             'app/*.js',
             'app/**/*.module.js',
