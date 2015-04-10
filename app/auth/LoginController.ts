@@ -15,6 +15,7 @@ module app.auth {
 
     export class LoginController implements ILoginScope {
 
+        $rootScope: ng.IRootScopeService;
         authenticationService: app.auth.IAuthenticationService;
         currentUser: ICurrentUser;
         isAuthenticated: boolean;
@@ -27,16 +28,19 @@ module app.auth {
             'app.auth.AuthenticationService',
             'currentUser',
             'localStorage',
-            'app.auth.LoginModalService'
+            'app.auth.LoginModalService',
+            '$rootScope'
         ];
         constructor(authenticationService: app.auth.IAuthenticationService,
                     currentUser: ICurrentUser,
                     localStorage: Storage,
-                    loginModalService: app.auth.ILoginModalService) {
+                    loginModalService: app.auth.ILoginModalService,
+                    $rootScope: ng.IRootScopeService) {
             this.authenticationService = authenticationService;
             this.currentUser = currentUser;
             this.localStorage = localStorage;
             this.loginModalService = loginModalService;
+            this.$rootScope = $rootScope;
             this.initialize();
         }
 
@@ -55,6 +59,14 @@ module app.auth {
                 });
         }
 
+        bindEvents(): void {
+            this.$rootScope.$on('logout', () => {
+                this.username = '';
+                this.password = '';
+                this.isAuthenticated = false;
+            });
+        }
+
         hideDialog(): void {
             this.loginModalService.hide();
         }
@@ -63,6 +75,7 @@ module app.auth {
             this.password = null;
             this.username = this.currentUser.username;
             this.isAuthenticated = this.currentUser.isAuthenticated;
+            this.bindEvents();
         }
 
         isFooterVisible(): boolean {
