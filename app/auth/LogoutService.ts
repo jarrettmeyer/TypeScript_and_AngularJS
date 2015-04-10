@@ -8,17 +8,20 @@ module app.auth {
 
     export class LogoutService implements ILogoutService {
 
+        $location: ng.ILocationService;
         $rootScope: ng.IRootScopeService;
         currentUser: app.ICurrentUser;
         localStorage: Storage;
 
-        static $inject = ['currentUser', 'localStorage', '$rootScope'];
+        static $inject = ['currentUser', 'localStorage', '$rootScope', '$location'];
         constructor(currentUser: app.ICurrentUser,
                     localStorage: Storage,
-                    $rootScope: ng.IRootScopeService) {
+                    $rootScope: ng.IRootScopeService,
+                    $location: ng.ILocationService) {
             this.currentUser = currentUser;
             this.localStorage = localStorage;
             this.$rootScope = $rootScope;
+            this.$location = $location;
         }
 
         logout(): void {
@@ -27,6 +30,7 @@ module app.auth {
             this.localStorage.removeItem('username');
             this.localStorage.removeItem('roles');
             this.$rootScope.$emit('logout');
+            this.$location.path('/');
         }
 
     }
