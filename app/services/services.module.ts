@@ -2,6 +2,6 @@
 
 ((): void => {
 
-    angular.module('app.services', ['ngCookies']);
+    angular.module('app.services', []);
 
 })();
