@@ -24,6 +24,30 @@ module.exports = function (grunt) {
             }
         },
 
+        //
+        // https://github.com/spatools/grunt-html-build
+        //
+        htmlbuild: {
+            dist: {
+                src: 'index.template.html',
+                dest: 'index.html',
+                options: {
+                    scripts: {
+                        app: [
+                            'app/*.module.js',
+                            'app/*.js'
+                        ],
+                        libs: [
+                            'bower_components/jquery/dist/jquery.min.js',
+                            'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                            'bower_components/angularjs/angular.js',
+                            'bower_components/angular-route/angular-route.js'
+                        ]
+                    }
+                }
+            }
+        },
+
         ts: {
             default: {
                 src: [
@@ -61,6 +85,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-html-build');
 
     grunt.registerTask('build:dev', ['ts', 'concat:dev']);
 
