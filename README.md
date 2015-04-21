@@ -5,12 +5,13 @@ This is a demo application showing how to build an AngularJS application with Ty
 
 ## About This Application
 
-+ Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, services, etc.). The
-    exception to this is the `services` folder, which is for services that are consumed by multiple features.
-+ Tests are kept next to the files they are meant to test.
-+ [tsd](https://github.com/DefinitelyTyped/tsd) is used to download TypeScript definition files. These files are kept in
-    `scripts/typings`.
-+ The `scripts/typings/all.d.ts` is used as a shortcut for having lots of references at the top of your `*.ts` files.
++   Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, services, etc.).
+    The exception to this is the `services` folder, which is for services that are consumed by multiple features.
++   Tests are kept next to the files they are meant to test.
++   [tsd](https://github.com/DefinitelyTyped/tsd) is used to download TypeScript definition files. These files are 
+    kept in `scripts/typings`.
++   The `scripts/typings/all.d.ts` is used as a shortcut for having lots of references at the top of your `*.ts` files.
++   This application does not rely on the IDE for anything. Everything is accomplished via the command line.
 
 ### app.auth
 
@@ -24,7 +25,11 @@ This is for primary layout components.
 
 ### app.services
 
+General services that are used throughout the application.
+
 ### app.todo
+
+The `todo` parts of the application.
 
 ### app.welcome
 
@@ -64,8 +69,8 @@ $ karma start
 ```
 
 When developing, I have two terminal windows open at all times.  The first window is running `grunt watch`. This is 
-watching all `*.ts` files for modifications and creating the corresponding `*.js` files. It is then watching all 
-`*.js` files for modifications and concatenating them into a single `app.js` file.
+watching all `*.ts` files for modifications and creating the corresponding `*.js` files. 
 
-The second terminal window is running `karma` (via the `karma start` command).
+The second terminal window is running `karma` (via the `karma start` command). `karma` is watching the `*.js` files and
+rerunning the unit tests every time there is a modification.
 

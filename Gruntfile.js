@@ -57,6 +57,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-html-build');
 
-    grunt.registerTask('build:dev', ['ts']);
+    grunt.registerTask('build:dev', ['ts', 'htmlbuild']);
 
 };
