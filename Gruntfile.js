@@ -13,7 +13,8 @@ module.exports = function (grunt) {
                         app: [
                             'scripts/app/app.module.js',
                             'scripts/app/**/*.module.js',
-                            'scripts/app/**/*.js'
+                            'scripts/app/**/*.js',
+                            '!scripts/app/**/*.test.js'
                         ],
                         libs: [
                             'bower_components/jquery/dist/jquery.min.js',
