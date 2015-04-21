@@ -1,5 +1,10 @@
 /// <reference path="../scripts/typings/all.d.ts" />
 
+//
+// This handler check local storage for username and roles. If these values
+// can be pulled out of local storage, then the user is already authenticated.
+// Set these values on the current user object.
+//
 module app {
 
     export interface IPreviousLoginHandler {
