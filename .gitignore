@@ -4,7 +4,9 @@
 bower_components/
 node_modules/
 
-app/**/*.js
-app/**/*.js.map
+# Do not check in any generated files.
+index.html
+scripts/app/**/*.js
+scripts/app/**/*.js.map
 scripts/app.js
 
