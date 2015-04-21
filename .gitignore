@@ -6,5 +6,7 @@ node_modules/
 
 app/**/*.js
 app/**/*.js.map
+scripts/app/**/*.js
+scripts/app/**/*.js.map
 scripts/app.js
 

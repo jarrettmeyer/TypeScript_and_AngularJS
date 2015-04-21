@@ -9,14 +9,13 @@ module.exports = function(config) {
             'bower_components/jquery/dist/jquery.js',
             'bower_components/bootstrap/dist/js/bootstrap.js',
             'bower_components/angularjs/angular.js',
-            'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-route/angular-route.js',
             'bower_components/sinon-1.14.1/index.js',
-            'app/app.module.js',
-            'app/*.js',
-            'app/**/*.module.js',
-            'app/**/*.js'
+            'scripts/app/app.module.js',
+            'scripts/app/**/*.module.js',
+            'scripts/app/*.js',
+            'scripts/app/**/*.js'
         ],
 
         exclude: [
