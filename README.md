@@ -47,7 +47,7 @@ I am assuming that you have [NodeJS](https://nodejs.org) already installed. The 
 Omit the `sudo` if you are running on Windows.
 
 ```
-$ sudo npm install -g bower grunt-cli karma-cli
+$ sudo npm install -g bower grunt-cli karma-cli typescript
 $ npm install
 $ bower install
 $ grunt build:dev
