@@ -43,14 +43,7 @@ section of the application the user is working under.
 
 ## Running the Application
 
-I am assuming that you have [NodeJS](https://nodejs.org) already installed. The commands shown below are for Mac/Linux.
-Omit the `sudo` if you are running on Windows.
-
 ```
-$ sudo npm install -g bower grunt-cli karma-cli typescript
-$ npm install
-$ bower install
-$ grunt build:dev
 $ vagrant up
 ```
 
