@@ -5,7 +5,7 @@ This is a demo application showing how to build an AngularJS application with Ty
 
 ## About This Application
 
-+ Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, services, etc.). The
++ Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, etc.). The
     exception to this is the `services` folder, which is for services that are consumed by multiple features.
 + Tests are kept next to the files they are meant to test.
 + [tsd](https://github.com/DefinitelyTyped/tsd) is used to download TypeScript definition files. These files are kept in
