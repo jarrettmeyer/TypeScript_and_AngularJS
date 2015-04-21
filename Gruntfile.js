@@ -53,9 +53,10 @@ module.exports = function (grunt) {
                 src: [
                     'app/**/*.ts'
                 ],
+                outDir: 'scripts/app',
                 options: {
                     target: 'es5',
-                    sourceMap: false
+                    sourceMap: true
                 }
             }
         },
