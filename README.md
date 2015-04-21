@@ -68,9 +68,28 @@ $ grunt ts
 $ karma start
 ```
 
-When developing, I have two terminal windows open at all times.  The first window is running `grunt watch`. This is 
+When developing, I have two terminal windows open at all times.  The first window is running `./watch_ts.sh`. This is 
 watching all `*.ts` files for modifications and creating the corresponding `*.js` files. 
 
 The second terminal window is running `karma` (via the `karma start` command). `karma` is watching the `*.js` files and
 rerunning the unit tests every time there is a modification.
+
+## Notes
+
+### Advantages of using a custom watch script instead of grunt watch
+
+`grunt watch`'s configuration looks like this:
+
+```
+watch: {
+  ts: {
+    files: ['app/**/*.ts'],
+    tasks: ['ts']
+  }
+}
+```
+
+When any `*.ts` file changes, run the `ts` task. This means that it is going to regenerate your entire application any
+time any file is altered. That is not ideal. We only want to regenerate the single `*.js` file that requires 
+regeneration. For that reason, there is an executable `watch_ts.sh` script ready to go in the repo.
 

@@ -34,27 +34,16 @@ module.exports = function (grunt) {
                 ],
                 outDir: 'scripts/app',
                 options: {
-                    target: 'es5',
-                    sourceMap: true
+                    comments: false,
+                    sourceMap: true,
+                    target: 'es5'
                 }
-            }
-        },
-
-        watch: {
-            ts: {
-                files: [
-                    'app/**/*.ts'
-                ],
-                tasks: [
-                    'ts'
-                ]
             }
         }
 
     });
 
     grunt.loadNpmTasks('grunt-ts');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-html-build');
 
     grunt.registerTask('build:dev', ['ts', 'htmlbuild']);
