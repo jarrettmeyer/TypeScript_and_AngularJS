@@ -5,6 +5,12 @@ This is a demo application showing how to build an AngularJS application with Ty
 
 ## About This Application
 
++ Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, etc.). The
+    exception to this is the `services` folder, which is for services that are consumed by multiple features.
++ Tests are kept next to the files they are meant to test.
++ [tsd](https://github.com/DefinitelyTyped/tsd) is used to download TypeScript definition files. These files are kept in
+    `scripts/typings`.
++ The `scripts/typings/all.d.ts` is used as a shortcut for having lots of references at the top of your `*.ts` files.
 +   Folder layout is by feature (dashboard, todo, settings, etc.), not by type (controllers, models, services, etc.).
     The exception to this is the `services` folder, which is for services that are consumed by multiple features.
 +   Tests are kept next to the files they are meant to test.
@@ -50,6 +56,8 @@ $ vagrant up
 The application runs inside a [Vagrant](https://www.vagrantup.com) virtual machine. Run `vagrant up` from the project 
 root. From there, you  should be able to navigate to [http://localhost:8080](http://localhost:8080) to see the 
 application run.
+
+If you make changes to the code, you will need to run `grunt build:dev` to transpile the TypeScript to JavaScript and concatenate the results into a single `app.js` file. Then [re]run the app to see the results of your change(s).
 
 ## Running Tests
 
